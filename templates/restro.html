@@ -1,0 +1,12 @@
+	{% for i in restaurant %}
+    <div class = 'restaurant'>
+		<span class = 'r1'><a href='{{url_for('restaurantMenu', restaurant_id = i.id) }}'> {{i.name}} </a></span>
+
+		<a href = '{{url_for('newRestro') }}'></a>
+		
+		<a href = '{{url_for('editRestro', id = i.id) }}'>Edit</a>
+		
+		
+	
+	</div>
+{% endfor %}
