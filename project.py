@@ -1,5 +1,3 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
 from flask import Flask, render_template, request, redirect, url_for, \
     flash, jsonify
 from sqlalchemy import create_engine
@@ -60,6 +58,7 @@ def getUserID(email):
 
 @app.route('/gconnect', methods=['POST'])
 def gconnect():
+    # Validate state token
     if request.args.get('state') != login_session['state']:
         response = make_response(json.dumps('Invalid state parameter'),
                                  401)
@@ -67,6 +66,7 @@ def gconnect():
         return response
     code = request.data
     try:
+        # Upgrade the authorization code into a credentials object
         oauth_flow = flow_from_clientsecrets(
             'client_secrets.json', scope='')
         oauth_flow.redirect_uri = 'postmessage'
@@ -83,6 +83,8 @@ def gconnect():
         'https://www.googleapis.com/oauth/v1/tokeninfo?access_token=%s'
     h = httplib2.Http()
     result = json.loads(h.request(url, 'GET')[1])
+
+    # If there was an error in the access token info, abort.
 
     if result.get('error') is not None:
         response = make_response(json.dumps(result.get('error')), 500)
@@ -227,6 +229,7 @@ def newRestro():
     else:
         return render_template('newrestro.html')
 
+# Create route for editMenuItem function here
 
 @app.route('/restaurant/<int:id>/edit/', methods=['GET', 'POST'])
 def editRestro(id):
@@ -245,6 +248,7 @@ def editRestro(id):
     else:
         return render_template('editrestro.html', item=editedRestro)
 
+# Create a route for deleteMenuItem function here
 
 @app.route('/restaurant/<int:id>/delete/', methods=['GET', 'POST'])
 def deleteRestro(restaurant_id):
@@ -285,6 +289,8 @@ def restaurantMenu(restaurant_id):
         return render_template('menu.html', restaurant=restaurant,
                                items=items)
 
+
+#Create route for newMenuItem function here
 
 @app.route('/restaurants/<int:restaurant_id>/new/', methods=['GET',
            'POST'])
