@@ -1,16 +1,33 @@
 <html>
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+	</head>
 <body>
-<h1> New Menu Restaurant </h1>
-
-<form action="{{url_for('newRestro' )}}" method = 'POST'>
-
-<p>Name:</p>
-
-<input type='text' size='30' name='name'>
-
+<div class = 'container'>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <p class="navbar-brand" }}'>New Restaurant</p>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href='{{url_for('restaurant1') }}'>Home</a></li>
+      
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href='{{url_for('gdisconnect')}}'><span class="glyphicon glyphicon-log-in "></span>Logout</a></li>
+    </ul>
+  </div>
+</nav>
+</br>
+<div class = 'pane'>
+<form action="{{ url_for('newRestro')}}" method = 'post'>
+<dl>
+	<dt>Name:</dt>
+		<dd><input type ='text' size='30' name='name'></dd>
+</dl>
 <input type='submit' value='Create'>
-
 </form>
-
+</div>
 </body>
 </html>
