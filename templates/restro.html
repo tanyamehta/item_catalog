@@ -1,12 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+{% include "header.html" %}
 	{% for i in restaurant %}
-    <div class = 'restaurant'>
-		<span class = 'r1'><a href='{{url_for('restaurantMenu', restaurant_id = i.id) }}'> {{i.name}} </a></span>
+    	<a href='{{url_for('restaurantMenu', restaurant_id = i.id) }}'> 
+    		<div class="row">
+    			<div class="col-sm-1"></div>
+    			<div class="col-sm-10">
+    				<h3>{{i.name}}</h3>
+    			</div>
+    			<div class="col-sm-1"></div>
+   			</div>
+   		</a>
 
-		<a href = '{{url_for('newRestro') }}'></a>
+
 		
-		<a href = '{{url_for('editRestro', id = i.id) }}'>Edit</a>
-		
+		<a href = '{{url_for('editRestro', resaturant_id = i.id) }}'>Edit</a>
+		<a href = '{{url_for('deleteRestro', resaturant_id = i.id) }}'>Delete</a>
+	
 		
 	
-	</div>
-{% endfor %}
+	{% endfor %}
+{% endblock %}
