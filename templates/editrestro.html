@@ -1,12 +1,14 @@
-<html>
-<body>
-<form action= "{{url_for('editRestro', id = item.id)}}" method = 'POST'>
+{% extends "base.html" %}
+{% block content %}
+{% include "header.html" %}
 
-<p>Name:</p>
-<input type = 'text' size='30' name = 'name' placeholder = '{{item.name}}'>
+    <form action="{{ url_for('editRestro', restaurant_id = editRestro.id) }}" method='POST'>
 
-<input type='submit' value='Edit'>
-</form>
-<a href= '{{url_for('restaurant1')}}'>Cancel</a>
-</body>
-</html>
+        <p style="color: #f8f8f8">Name:</p>
+        <input type='text' size='30' name='name' placeholder='{{ editRestro.name }}'>
+        <button type='submit' class="btn btn-info"> Edit </button>
+    </form>
+
+    <a href='{{ url_for('restaurant1') }}' class="btn btn-default">Cancel</a>
+
+{% endblock %}
