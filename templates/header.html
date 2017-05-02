@@ -1,0 +1,34 @@
+<html>
+<head>
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	</head>
+
+	
+	<body>
+	<div class = 'container'>
+	<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <p class="navbar-brand" >
+      	<a href="{{ url_for('restaurant1') }}">Show All Restaurants</a>
+      </p>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href='{{url_for('restaurant1') }}'>Home</a></li>
+      <li><a href='{{url_for('newRestro') }}'>Add Restaurant</a></li>      
+      
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li>
+      	{% if 'username' not in session %}
+      		<a href="{{url_for('showLogin')}}""><span class="glyphicon glyphicon-log-in "></span> Login</a>
+      	{% else %}
+      		<a href="{{ url_for('gdisconnect') }}""><span class="glyphicon glyphicon-log-out "></span> Logout</a>
+      	{% endif %}
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+</div>
