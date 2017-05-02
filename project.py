@@ -231,11 +231,11 @@ def newRestro():
 
 # Create route for editMenuItem function here
 
-@app.route('/restaurant/<int:id>/edit/', methods=['GET', 'POST'])
-def editRestro(id):
+@app.route('/restaurant/<int:restaurant_id>/edit/', methods=['GET', 'POST'])
+def editRestro(restaurant_id):
     if 'username' not in login_session:
         return redirect('/login')
-    editedRestro = session.query(Restaurant).filter_by(id=id).one()
+    editedRestro = session.query(Restaurant).filter_by(id=restaurant_id).one()
     if editedRestro.user_id != login_session['user_id']:
         flash('Not authorised to edit this restaurant')
         return redirect(url_for('restaurant1'))
@@ -246,32 +246,27 @@ def editRestro(id):
         session.commit()
         return redirect(url_for('restaurant1'))
     else:
-        return render_template('editrestro.html', item=editedRestro)
+        return render_template('editrestro.html', editRestro=editedRestro)
 
 # Create a route for deleteMenuItem function here
 
-@app.route('/restaurant/<int:id>/delete/', methods=['GET', 'POST'])
+@app.route('/restaurant/<int:restaurant_id>/delete/', methods=['GET', 'POST'])
 def deleteRestro(restaurant_id):
     if 'username' not in login_session:
         return redirect('/login')
     RestroToDelete = \
-        session.query(Restaurant).filter_by(restaurant_id=restaurant_id).one()
+        session.query(Restaurant).filter_by(id=restaurant_id).one()
     if RestroToDelete.user_id != login_session['user_id']:
         flash('Error:Cant delete')
         return redirect(url_for('restaurant1'))
     if request.method == 'POST':
-        query = \
-            session.query(MenuItem).filter_by(
-                restaurant_id=RestroToDelete.id).all()
-        for q in query:
-            session.delete(q)
-            session.commit()
         session.delete(RestroToDelete)
+        flash('Successfully deleted Restaurant.')
         session.commit()
         return redirect(url_for('restaurant1'))
     else:
         return render_template('deleterestro.html',
-                               restaurant_id=restaurant_id)
+                               restaurant=restaurant_id)
 
 
 @app.route('/')
