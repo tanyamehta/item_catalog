@@ -35,7 +35,7 @@ def login_required(f):
 
 @app.route('/login')
 def showLogin():
-        """ Render the login page after a random state token is created.
+    """ Render the login page after a random state token is created.
         
     Creates a random anti-forgery state token with each GET request sent to
     localhost:5000/login before rendering the login page.
@@ -69,7 +69,7 @@ def createUser(login_session):
 
 
 def getUserInfo(user_id):
-        """ Returns the user object associated with the given id number.
+    """ Returns the user object associated with the given id number.
     Args:
         user_id: An integer identifying a distinct user.
     Returns:
@@ -80,7 +80,7 @@ def getUserInfo(user_id):
 
 
 def getUserID(email):
-        """ Return a user ID from the database.
+    """ Return a user ID from the database.
     Returns a user id for a given e-mail address if the e-mail address belongs
     to a user stored in the database.
     Args:
@@ -95,7 +95,7 @@ def getUserID(email):
     except:
         return None
 
-# 
+
 @app.route('/gconnect', methods=['POST'])
 def gconnect():
     # Validate state token
@@ -227,7 +227,7 @@ def gdisconnect():
 
 @app.route('/restaurants/<int:restaurant_id>/menu/JSON')
 def restaurantMenuJSON(restaurant_id):
-        """ Returns all restaurants in JSON format. """
+    """ Returns all restaurants in JSON format. """
     restaurant = \
         session.query(Restaurant).filter_by(id=restaurant_id).one()
     items = \
@@ -237,7 +237,7 @@ def restaurantMenuJSON(restaurant_id):
 
 @app.route('/restaurants/<int:restaurant_id>/menu/<int:menu_id>/JSON')
 def menuItemJSON(restaurant_id, menu_id):
-        """ Returns restaurant menu in JSON format. """
+    """ Returns restaurant menu in JSON format. """
 
     menuItem = session.query(MenuItem).filter_by(id=menu_id).one()
     return jsonify(MenuItem=menuItem.serialize)
@@ -246,7 +246,7 @@ def menuItemJSON(restaurant_id, menu_id):
 @app.route('/')
 @app.route('/restaurants')
 def restaurant1():
-        """"Shows all restaurant collection in the database"""
+    """"Shows all restaurant collection in the database"""
 
     restaurant = session.query(Restaurant).all()
     if 'username' not in login_session:
