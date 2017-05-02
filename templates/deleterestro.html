@@ -1,18 +1,15 @@
-<html>
+{% extends "base.html" %}
+{% block content %}
+{% include "header.html" %}
 
-<body>
-<h1> Are you sure you want to delete {{restaurant.name}}? </h1>
+    <h1> Are you sure you want to delete {{ restaurant.name }}? </h1>
+    <br>
+    <form action="#" method='post'>
 
-<form action="{{ url_for('deleteRestro',id=id)}}" method = 'post'>
+        <button type='submit' class="btn btn-danger"> Delete</button>
 
-<input type='submit', value = 'Delete'>
+    </form>
+    <br>
+    <a href="{{ url_for('restaurant1') }}" class="btn btn-default"> Cancel </a>
 
-
-
-
-</form>
-
-<a href = "{{ url_for('restaurant1)}}"> Cancel </a>
-</body>
-
-</html>
+{% endblock %}
